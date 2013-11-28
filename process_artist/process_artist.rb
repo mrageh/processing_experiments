@@ -9,17 +9,6 @@ class ProcessArtist < Processing::App
     # Do Stuff
   end
 
-  def run_command(command)
-    puts "Running Command #{command}"
-    command.split
-    if command.count == 10
-      command[0]
-      command[1..3]
-      command[4..6]
-      command[7..9]
-    end
-  end
-
   def key_pressed
     warn "A key was pressed! #{key.inspect}"
     if @queue.nil?
@@ -32,6 +21,22 @@ class ProcessArtist < Processing::App
       run_command(@queue)
       @queue = ""
     end
+  end
+
+  def command_correct(command)
+    if command[0] == 'b'
+      command[0]
+    else
+      'This is the wrong command!!'
+    end
+  end
+
+  def run_command(command)
+    command_correct(command)
+    numbers     = command[1..-1]
+    color_group = numbers.split(',')
+    rgb         = color_group.map {|c| c.to_i}
+    background(rgb[0], rgb[1], rgb[2])
   end
 end
 
