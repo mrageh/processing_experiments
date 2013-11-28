@@ -9,6 +9,21 @@ class ProcessArtist < Processing::App
     # Do Stuff
   end
 
+  def mouse_pressed
+    ellipse_mode CENTER
+    rect_mode CENTER
+    ellipse(mouse_x, mouse_y, 100, 100)
+  end
+
+  def mouse_dragged
+    mouse_pressed
+  end
+
+  def mouse_released
+    stop()
+    background(0,0,0)
+  end
+
   def key_pressed
     warn "A key was pressed! #{key.inspect}"
     if @queue.nil?
